@@ -1,0 +1,5 @@
+node_modules
+.DS_Store
+
+# style.css is excluded as it is built on Netlify
+build/style.css

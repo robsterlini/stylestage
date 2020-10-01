@@ -1,0 +1,25 @@
+{
+  "name": "stylestage",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://robsterlini@github.com/robsterlini/stylestage.git"
+  },
+  "author": "Rob Sterlini <hi@robsterlini.co.uk>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/robsterlini/stylestage/issues"
+  },
+  "homepage": "https://github.com/robsterlini/stylestage#readme",
+  "devDependencies": {
+    "browser-sync": "^2.26.12",
+    "gulp": "^4.0.2",
+    "gulp-sass": "^4.1.0",
+    "node-sass": "^4.14.1"
+  }
+}
