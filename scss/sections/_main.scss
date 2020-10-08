@@ -7,6 +7,11 @@
   ul,
   ol {
 
+    @include max-width($layout-l) {
+      margin-left: 100% / $grid-columns;
+      width: 100% / $grid-columns * ($grid-columns - 1);
+    }
+
     > li {
 
       &::before {
@@ -66,11 +71,19 @@
     &:nth-of-type(2) {
 
       ul {
-        width: 6 / 7 * 100%;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-gap: 0 calc(var(--baseline) * 2);
-        margin-bottom: 0;
+
+        @include min-width($layout-l) {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          grid-gap: 0 var(--grid-gap);
+          margin-bottom: 0;
+          width: 100%;
+        }
+
+        @include min-width($layout-xl) {
+          width: 6 / 7 * 100%;
+          grid-template-columns: repeat(3, 1fr);
+        }
 
         > li {
           word-break: break-all;

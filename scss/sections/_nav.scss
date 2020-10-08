@@ -2,25 +2,70 @@ nav {
   line-height: calc(var(--baseline) * 3);
   margin-top: calc(var(--baseline) * 0);
 
+  @include max-width($layout-l) {
+    margin-bottom: calc(var(--baseline) * 3);
+  }
+
   ul {
     display: grid;
-    grid-template-columns: repeat(9, 1fr);
-    grid-gap: var(--baseline) calc(var(--baseline) * 2);
+    grid-template-columns: repeat(var(--nav-columns), 1fr);
+    grid-gap: var(--baseline) var(--grid-gap);
 
     > li {
       margin: 0;
-      grid-row: 2;
-
-      &:nth-of-type(5) {
-        grid-row: 1;
-      }
+      grid-column: span $grid-columns;
 
       &:nth-of-type(n+5) {
-        grid-column: 8 / span 2;
 
         a {
           @include button;
           margin-top: 0;
+        }
+      }
+
+      @include min-max-width($layout-s, $layout-m) {
+        grid-column: span 6;
+      }
+
+      @include min-max-width($layout-m, $layout-l) {
+        grid-column: span 3;
+
+        &:nth-of-type(n+5) {
+          grid-column: 8 / span 5;
+        }
+
+        &:nth-of-type(5) {
+          grid-row: 1;
+        }
+      }
+
+      @include min-max-width($layout-l, $layout-xl) {
+        grid-column: span 2;
+
+        &:nth-of-type(3),
+        &:nth-of-type(4) {
+          grid-row: 2;
+        }
+
+        &:nth-of-type(5) {
+          grid-area: #{1} / 7 / span 1 / span 2;
+        }
+
+        &:nth-of-type(6) {
+          grid-area: #{2} / 7 / span 1 / span 2;
+        }
+      }
+
+      @include min-width($layout-xl) {
+        grid-row: 2;
+        grid-column: span 1;
+
+        &:nth-of-type(5) {
+          grid-row: 1;
+        }
+
+        &:nth-of-type(n+5) {
+          grid-column: 8 / span 2;
         }
       }
     }

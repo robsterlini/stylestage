@@ -118,8 +118,12 @@ a {
   margin: 0;
   line-height: rem(24);
   position: fixed;
-  top: rem(8);
-  right: calc((100% - #{rem(1280)}) / 2);
+  top: rem(44);
+  right: rem(20);
+
+  @include min-width($layout-xl + 40) {
+    right: calc((100% - #{rem($layout-xl)}) / 2);
+  }
 
   &:not(:focus) {
     @include visuallyhidden;

@@ -2,6 +2,10 @@
 
   h2 {
     @include h3;
+
+    @include min-width($layout-l) {
+      --margin-top: 5;
+    }
   }
 
   .features {
@@ -11,7 +15,14 @@
     }
 
     a {
-      display: table;
+
+      @include max-width($layout-s) {
+        display: table;
+      }
+
+      @include min-width($layout-l) {
+        display: table;
+      }
     }
   }
 

@@ -2,14 +2,20 @@
   @return $pixels / 16 * 1rem;
 }
 
-@mixin min-width($pixels) {
-  @media screen and (min-width: #{$pixels / 16 * 1em}) {
+@mixin min-width($min) {
+  @media screen and (min-width: #{$min / 16 * 1em}) {
     @content;
   }
 }
 
-@mixin max-width($pixels) {
-  @media screen and (max-width: #{($pixels - 1) / 16 * 1em}) {
+@mixin max-width($max) {
+  @media screen and (max-width: #{($max - 1) / 16 * 1em}) {
+    @content;
+  }
+}
+
+@mixin min-max-width($min, $max) {
+  @media screen and (min-width: #{$min / 16 * 1em}) and (max-width: #{($max - 1) / 16 * 1em}) {
     @content;
   }
 }

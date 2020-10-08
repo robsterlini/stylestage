@@ -1,9 +1,7 @@
 #profile-title {
   @include h3;
 
-  --margin-top: 5;
-
-  @include min-width($layout-xl) {
+  @include min-width($layout-l) {
     @include ui-nav;
   }
 }
@@ -18,7 +16,14 @@
 
         &:first-child {
           font-weight: 600;
-          display: block;
+
+          @include min-max-width($layout-l, $layout-xl) {
+            display: block;
+          }
+
+          @include max-width($layout-s) {
+            display: block;
+          }
         }
       }
     }
@@ -28,7 +33,7 @@
     }
   }
 
-  @include min-width($layout-xl) {
+  @include min-width($layout-l) {
     @include ui-wrapper;
 
     position: fixed;

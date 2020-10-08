@@ -1,6 +1,4 @@
-$grid-l-columns: 12;
-$grid-l-header-width: 3;
-$grid-l-aside-width: 2;
+$grid-columns: 12;
 
 @mixin ui-nav {
   border: $ui-border-width solid $ui-border-color;
@@ -35,6 +33,40 @@ $grid-l-aside-width: 2;
   }
 }
 
+:root {
+  --baseline: #{rem(8)};
+  --grid-gap: #{rem(8)};
+  --body-top-padding: 0;
+  --nav-columns: 12;
+  --main-columns: 8;
+
+  font-size: rem(12);
+
+  @include min-width($layout-s) {
+    --body-top-padding: 2;
+
+    font-size: rem(14);
+  }
+
+  @include min-width($layout-m) {
+    --body-top-padding: 4;
+
+    font-size: rem(16);
+  }
+
+  @include min-width($layout-l) {
+    --baseline: #{rem(8)};
+    --grid-gap: #{rem(16)};
+    --body-top-padding: 10;
+    --nav-columns: 8;
+  }
+
+  @include min-width($layout-xl) {
+    --nav-columns: 9;
+    --main-columns: 7;
+  }
+}
+
 html {
 
   &::before {
@@ -47,7 +79,7 @@ html {
     z-index: 999;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 100vw;
     height: 100%;
   }
 
@@ -65,7 +97,7 @@ html {
     margin: 0;
     top: 0;
     left: 0;
-    right: 0;
+    width: 100vw;
     padding-left: rem(($ui-circle-size * 5) + ($ui-circle-space * 3) + $ui-offset-left + $ui-offset-right);
     z-index: 1000;
   }
@@ -76,16 +108,15 @@ body {
   border: rem(1) solid;
   border-color: #db60e1 #a785c8;
   display: grid;
-  grid-template-columns: repeat($grid-l-columns, 1fr);
-  grid-gap: calc(var(--baseline) * 2);
+  grid-template-columns: repeat($grid-columns, 1fr);
+  grid-gap: var(--grid-gap);
   grid-template-rows: auto auto 1fr auto;
   margin: rem(80) auto rem(40);
   width: calc(100% - #{rem(40)});
   max-width: rem(1280);
-  padding: calc(var(--baseline) * 10) calc(var(--baseline) * 2) calc(var(--baseline) * 3);
+  padding: calc(var(--baseline) * var(--body-top-padding)) var(--grid-gap) calc(var(--baseline) * 3);
   position: relative;
   line-height: calc(var(--baseline) * 3);
-  font-size: rem(16);
 
   &::before,
   &::after {
@@ -112,10 +143,10 @@ body {
     background: linear-gradient(to right,
       rgba(cyan, 0.5),
       transparent #{rem(1)},
-      transparent #{rem(15)},
-      rgba(cyan, 0.5) #{rem(15)},
-      transparent #{rem(16)},
-    ) rem(-1) 0 / calc(8.33% - #{rem(1)});
+      transparent calc(var(--grid-gap) - #{rem(1)}),
+      rgba(cyan, 0.5) calc(var(--grid-gap) - #{rem(1)}),
+      transparent var(--grid-gap),
+    ) rem(-1) 0 / calc(8.333333334% - (var(--grid-gap) / #{$grid-columns + 2}));
     left: 0;
     right: 0;
     bottom: 0;
@@ -124,26 +155,61 @@ body {
 }
 
 header {
-  grid-row: 1 / 4;
-  grid-column: 1 / #{$grid-l-header-width + 1};
+  grid-column: 1 / -1;
+
+  @include min-width($layout-l) {
+    grid-area: #{1} / 1 / span 2 / span 4;
+  }
+
+  @include min-width($layout-xl) {
+    grid-area: #{1} / 1 / #{-1} / span #{3};
+  }
 }
 
 nav {
-  grid-column: #{$grid-l-header-width + 1} / -1;
-  grid-row: 1;
+  grid-area: #{1} / 1 / span 1 / span var(--nav-columns);
+
+  @include min-width($layout-l) {
+    grid-area: #{1} / 5 / span 1 / span var(--nav-columns);
+  }
+
+  @include min-width($layout-xl) {
+    grid-area: #{1} / 4 / span 1 / span var(--nav-columns);
+  }
 }
 
 main {
-  grid-row: 2 / 4;
-  grid-column: #{$grid-l-header-width + 1} / #{$grid-l-columns - $grid-l-aside-width + 1};
+  grid-column: 1 / -1;
+
+  @include min-width($layout-l) {
+    grid-area: #{2} / #{5} / 4 / span var(--main-columns);
+  }
+
+  @include min-width($layout-xl) {
+    grid-area: #{2} / #{4} / 4 / span var(--main-columns);
+  }
 }
 
-.profile,
+.profile {
+
+  // Above $layout-l this is a popout UI
+  @include max-width($layout-l) {
+    grid-column: 1 / -1;
+  }
+}
+
 #styles {
-  grid-column: #{$grid-l-columns - $grid-l-aside-width + 1} / -1;
+  grid-column: 1 / -1;
+
+  @include min-width($layout-l) {
+    grid-area: 3 / 1 / span 1 / span 4;
+  }
+
+  @include min-width($layout-xl) {
+    grid-area: 2 / 11 / span 1 / span 2;
+  }
 }
 
 .page-footer {
   grid-column: 1 / -1;
-  grid-row: 5;
 }

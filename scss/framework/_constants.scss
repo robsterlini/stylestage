@@ -7,12 +7,15 @@ $link-hover: darken($link, 5%);
 $link-visited: purple;
 $link-visited-hover: darken($link-visited, 5%);
 
+$layout-s: 360;
+$layout-m: 512;
+$layout-l: 768;
 $layout-xl: 1280;
 
 $ui-nav-background: #c3bbaf;
 $ui-nav-color: darken($ui-nav-background, 45%);
 $ui-border-color: darken($ui-nav-background, 25%);
-$ui-border-width: rem(3);
+$ui-border-width: rem(2);
 $ui-circle-size: 4;
 $ui-circle-space: 6;
 $ui-offset-left: 10;
