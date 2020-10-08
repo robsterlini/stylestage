@@ -1,0 +1,14 @@
+header {
+
+  h1 {
+    margin-top: calc(var(--baseline) * -1); // Sets the title on the same key line as the first h2 in #main
+  }
+
+  h2 {
+    @include h3;
+  }
+
+  .link-github {
+    @include button;
+  }
+}

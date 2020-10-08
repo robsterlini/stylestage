@@ -1,0 +1,93 @@
+@mixin heading($level: false) {
+  font-family: $ff-heading;
+  font-weight: 400;
+  font-size: calc(var(--font-size) * var(--baseline));
+  margin-top: calc(var(--margin-top, 2) * var(--baseline));
+  margin-bottom: calc(var(--margin-bottom, 1) * var(--baseline));
+  line-height: calc(var(--line-height) * var(--baseline));
+  padding-top: calc(var(--baseline) * var(--test, 1));
+  padding-bottom: calc(var(--baseline) * (1 - var(--test, 1)));
+
+  &::after {
+    content: ' •';
+    line-height: 1;
+    opacity: 0.25;
+    font-size: 0.6em;
+  }
+}
+
+@mixin h1 {
+  --font-size: 10;
+  --margin-top: 4;
+  --margin-bottom: 1;
+  --line-height: 11;
+  --test: 0.5;
+
+  letter-spacing: -0.025em;
+}
+
+@mixin h2 {
+  --font-size: 4;
+  --line-height: 5;
+  --margin-top: 8;
+  --test: 0.4;
+}
+
+@mixin h3 {
+  --font-size: 3;
+  --line-height: 4;
+  --test: 0.1;
+  --margin-top: 3;
+}
+
+@mixin h4 {
+  --font-size: 2;
+  --line-height: 3;
+  --margin-top: 2;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  @include heading;
+
+  background: rgba(red, 0.05);
+}
+
+h1 {
+  @include h1;
+}
+
+h2 {
+  @include h2;
+}
+
+h3 {
+  @include h3;
+}
+
+h4 {
+  @include h4;
+}
+
+p {
+
+  &::after {
+    content: '¶';
+    opacity: 0.25;
+  }
+}
+
+p,
+ul,
+ol {
+  margin-top: calc(2 * var(--baseline));
+}
+
+ul,
+ol {
+  > li {
+    margin-bottom: var(--baseline);
+  }
+}

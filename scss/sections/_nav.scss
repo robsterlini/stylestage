@@ -1,0 +1,28 @@
+nav {
+  line-height: calc(var(--baseline) * 3);
+  margin-top: calc(var(--baseline) * 0);
+
+  ul {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-gap: var(--baseline) calc(var(--baseline) * 2);
+
+    > li {
+      margin: 0;
+      grid-row: 2;
+
+      &:nth-of-type(5) {
+        grid-row: 1;
+      }
+
+      &:nth-of-type(n+5) {
+        grid-column: 8 / span 2;
+
+        a {
+          @include button;
+          margin-top: 0;
+        }
+      }
+    }
+  }
+}

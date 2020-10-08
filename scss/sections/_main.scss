@@ -1,0 +1,104 @@
+#main {
+
+  &:focus {
+    outline: none; // TODO: Replace this with something accessible
+  }
+
+  ul,
+  ol {
+
+    > li {
+
+      &::before {
+        content: '•';
+        margin-left: -0.8em;
+        margin: 0 rem(-5) 0 rem(-16);
+        width: rem(16);
+        padding-right: rem(1);
+        display: inline-block;
+        text-align: center;
+        font-weight: 600;
+      }
+
+      &::after {
+        content: ' •';
+        opacity: 0.25;
+      }
+    }
+  }
+
+  ol {
+    counter-reset: ol;
+
+    > li {
+
+      &::before {
+        counter-increment: ol;
+        content: counter(ol);
+        font-size: 0.85em;
+        line-height: 1;
+      }
+    }
+  }
+}
+
+#about {
+
+  .container {
+
+    &:nth-of-type(1) {
+
+      > :first-child {
+        --margin-top: 4; // Aligns the second line of Style Stage with the heading baseline
+      }
+
+      > p {
+
+        &:first-of-type {
+          --margin-bottom: 4;
+
+          @include heading;
+          @include h3;
+        }
+      }
+    }
+
+    &:nth-of-type(2) {
+
+      ul {
+        width: 6 / 7 * 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 0 calc(var(--baseline) * 2);
+        margin-bottom: 0;
+
+        > li {
+          word-break: break-all;
+
+          &::before {
+            margin-right: 0; // Not needed as CSS Grid is used here whereas inline-block is used in all others
+          }
+        }
+      }
+    }
+  }
+}
+
+#guidelines {
+
+  .container {
+
+    > :last-child {
+      @include button;
+    }
+  }
+}
+
+#files {
+
+  a {
+    @include button;
+
+    margin-top: var(--baseline);
+  }
+}

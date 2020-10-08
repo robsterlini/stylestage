@@ -1,0 +1,39 @@
+#profile-title {
+  @include h3;
+
+  --margin-top: 5;
+
+  @include min-width($layout-xl) {
+    @include ui-nav;
+  }
+}
+
+.profile {
+
+  .container {
+
+    ul {
+
+      span {
+
+        &:first-child {
+          font-weight: 600;
+          display: block;
+        }
+      }
+    }
+
+    > :last-child {
+      @include button;
+    }
+  }
+
+  @include min-width($layout-xl) {
+    @include ui-wrapper;
+
+    position: fixed;
+    bottom: rem(20);
+    left: rem(10);
+  }
+}
+

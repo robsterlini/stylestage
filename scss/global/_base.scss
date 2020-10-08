@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Elsie&family=Miriam+Libre:wght@400;700&display=swap');
+
+html {
+  --baseline: #{rem(8)};
+
+  scroll-behavior: smooth;
+  font-family: $ff-body;
+
+  @media (prefers-reduced-motion: reduce) {
+    scroll-behavior: auto;
+  }
+}
+
+[id] {
+  scroll-margin-top: calc(var(--baseline) * 4);
+}

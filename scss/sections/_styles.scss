@@ -1,0 +1,24 @@
+#styles {
+
+  h2 {
+    @include h3;
+  }
+
+  .features {
+
+    li {
+      margin-bottom: var(--baseline);
+    }
+
+    a {
+      display: table;
+    }
+  }
+
+  .container {
+
+    > :last-child {
+      @include button;
+    }
+  }
+}

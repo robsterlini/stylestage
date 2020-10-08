@@ -1,0 +1,22 @@
+$ff-heading: 'Elsie', serif;
+$ff-body: 'Miriam Libre', sans-serif;
+
+$link: #0064CE;
+$link-hover: darken($link, 5%);
+
+$link-visited: purple;
+$link-visited-hover: darken($link-visited, 5%);
+
+$layout-xl: 1280;
+
+$ui-nav-background: #c3bbaf;
+$ui-nav-color: darken($ui-nav-background, 45%);
+$ui-border-color: darken($ui-nav-background, 25%);
+$ui-border-width: rem(3);
+$ui-circle-size: 4;
+$ui-circle-space: 6;
+$ui-offset-left: 10;
+$ui-offset-right: 10;
+$ui-padding: rem($ui-offset-left);
+$ui-background: mix($ui-nav-background, white);
+$ui-color: darken($ui-nav-background, 66.6%);

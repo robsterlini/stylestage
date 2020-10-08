@@ -1,0 +1,149 @@
+$grid-l-columns: 12;
+$grid-l-header-width: 3;
+$grid-l-aside-width: 2;
+
+@mixin ui-nav {
+  border: $ui-border-width solid $ui-border-color;
+  background: $ui-nav-background #{rem(1) * $ui-offset-left} center no-repeat;
+  line-height: rem(30);
+  height: rem(35);
+  font-weight: 600;
+  font-family: $ff-body;
+  font-size: rem(16);
+  color: $ui-nav-color;
+  padding: 0 rem(10);
+  text-shadow: rgba(white, 0.2) 0 rem(1) 0;
+  margin: ($ui-border-width + $ui-padding) * -1;
+  margin-bottom: 0;
+}
+
+@mixin ui-wrapper($include-content: true) {
+  border: $ui-border-width solid $ui-border-color;
+
+  @if ($include-content) {
+    background: $ui-background;
+    color: $ui-color;
+    padding: $ui-padding;
+
+    a {
+
+      &:not(:hover):not(:focus) {
+        color: inherit;
+        text-decoration-color: currentColor;
+      }
+    }
+  }
+}
+
+html {
+
+  &::before {
+    @include ui-wrapper;
+
+    background: none;
+    content: '';
+    position: fixed;
+    pointer-events: none;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  @function encode-svg-color($color) {
+    @return '%23' + str-slice(quote($color), 2);
+  }
+
+  &::after {
+    @include ui-nav;
+
+    background-position: #{rem(1) * $ui-offset-left} center;
+    background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='48px' height='30px' viewBox='0 0 48 30' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3EArtboard%3C/title%3E%3Cg id='Artboard' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Ccircle id='Oval' fill='#{encode-svg-color($ui-nav-color)}' cx='#{$ui-circle-size}' fill-opacity='0.85' cy='15' r='#{$ui-circle-size}'%3E%3C/circle%3E%3Ccircle id='Oval' fill='#{encode-svg-color($ui-nav-color)}' fill-opacity='0.85' cx='#{($ui-circle-size * 3) + $ui-circle-space}' cy='15' r='#{$ui-circle-size}'%3E%3C/circle%3E%3Ccircle id='Oval' fill='#{encode-svg-color($ui-nav-color)}' fill-opacity='0.85' cx='#{($ui-circle-size * 5) + ($ui-circle-space * 2)}' cy='15' r='#{$ui-circle-size}'%3E%3C/circle%3E%3C/g%3E%3C/svg%3E");
+    content: 'DesignInBrowser CS2020';
+    position: fixed;
+    margin: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding-left: rem(($ui-circle-size * 5) + ($ui-circle-space * 3) + $ui-offset-left + $ui-offset-right);
+    z-index: 1000;
+  }
+}
+
+body {
+  background: #f7f7f7; // TODO: Move to relevant file
+  border: rem(1) solid;
+  border-color: #db60e1 #a785c8;
+  display: grid;
+  grid-template-columns: repeat($grid-l-columns, 1fr);
+  grid-gap: calc(var(--baseline) * 2);
+  grid-template-rows: auto auto 1fr auto;
+  margin: rem(80) auto rem(40);
+  width: calc(100% - #{rem(40)});
+  max-width: rem(1280);
+  padding: calc(var(--baseline) * 10) calc(var(--baseline) * 2) calc(var(--baseline) * 3);
+  position: relative;
+  line-height: calc(var(--baseline) * 3);
+  font-size: rem(16);
+
+  &::before,
+  &::after {
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    bottom: 0;
+  }
+
+  &::before {
+    background:
+      linear-gradient(to bottom,
+        rgba(blue, 0.2),
+        transparent #{rem(1)},
+      ) 0 0 / #{rem(8)} #{rem(8)};
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: calc(var(--baseline) * 1);
+      margin-top: rem(-0.5);
+    }
+
+  &::after {
+    background: linear-gradient(to right,
+      rgba(cyan, 0.5),
+      transparent #{rem(1)},
+      transparent #{rem(15)},
+      rgba(cyan, 0.5) #{rem(15)},
+      transparent #{rem(16)},
+    ) rem(-1) 0 / calc(8.33% - #{rem(1)});
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+  }
+}
+
+header {
+  grid-row: 1 / 4;
+  grid-column: 1 / #{$grid-l-header-width + 1};
+}
+
+nav {
+  grid-column: #{$grid-l-header-width + 1} / -1;
+  grid-row: 1;
+}
+
+main {
+  grid-row: 2 / 4;
+  grid-column: #{$grid-l-header-width + 1} / #{$grid-l-columns - $grid-l-aside-width + 1};
+}
+
+.profile,
+#styles {
+  grid-column: #{$grid-l-columns - $grid-l-aside-width + 1} / -1;
+}
+
+.page-footer {
+  grid-column: 1 / -1;
+  grid-row: 5;
+}
